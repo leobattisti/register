@@ -8,6 +8,6 @@ public interface CustomerApiConverter {
 
     CustomerBO toBusiness(CustomerDTO dto);
 
-    CustomerDTO toDto(CustomerBO bo);
+    CustomerDTO toResponse(CustomerBO bo);
 
 }

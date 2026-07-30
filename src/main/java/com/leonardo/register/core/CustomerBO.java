@@ -14,15 +14,10 @@ import java.time.LocalDate;
 public class CustomerBO {
 
     Long id;
-
     String cpf;
-
     String name;
-
     String socialName;
-
     LocalDate birthDate;
-
     Address address;
 
     @With
