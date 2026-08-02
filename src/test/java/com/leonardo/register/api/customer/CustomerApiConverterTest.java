@@ -1,6 +1,6 @@
 package com.leonardo.register.api.customer;
 
-import com.leonardo.register.core.CustomerBO;
+import com.leonardo.register.core.customer.CustomerBO;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,7 @@ public class CustomerApiConverterTest {
         var bo = converter.toBusiness(dto);
 
         assertThat(bo.getId()).isEqualTo(dto.id());
-        assertThat(bo.getCpf()).isEqualTo(dto.cpf());
+        assertThat(bo.getDocument()).isEqualTo(dto.document());
         assertThat(bo.getName()).isEqualTo(dto.name());
         assertThat(bo.getSocialName()).isEqualTo(dto.socialName());
         assertThat(bo.getBirthDate()).isEqualTo(dto.birthDate());
@@ -42,7 +42,7 @@ public class CustomerApiConverterTest {
         var dto = converter.toResponse(bo);
 
         assertThat(dto.id()).isEqualTo(bo.getId());
-        assertThat(dto.cpf()).isEqualTo(bo.getCpf());
+        assertThat(dto.document()).isEqualTo(bo.getDocument());
         assertThat(dto.name()).isEqualTo(bo.getName());
         assertThat(dto.socialName()).isEqualTo(bo.getSocialName());
         assertThat(dto.birthDate()).isEqualTo(bo.getBirthDate());

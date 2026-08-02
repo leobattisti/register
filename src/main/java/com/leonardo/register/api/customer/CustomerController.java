@@ -1,6 +1,6 @@
 package com.leonardo.register.api.customer;
 
-import com.leonardo.register.core.CustomerService;
+import com.leonardo.register.core.customer.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

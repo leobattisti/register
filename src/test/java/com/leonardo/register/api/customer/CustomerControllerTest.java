@@ -1,7 +1,7 @@
 package com.leonardo.register.api.customer;
 
 import com.leonardo.register.api.GlobalExceptionHandler;
-import com.leonardo.register.core.CustomerService;
+import com.leonardo.register.core.customer.CustomerService;
 import lombok.SneakyThrows;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class CustomerControllerTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String BAD_REQUEST_CODE = "400";
 
-    private static final String[] ERROR_MESSAGES_CUSTOMER = {"CPF is required",
+    private static final String[] ERROR_MESSAGES_CUSTOMER = {"Document is required",
             "Name is required",
             "Birth date is required",
             "Address is required"};
@@ -63,7 +63,7 @@ class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(bo.getId().toString()))
-                .andExpect(jsonPath("$.cpf").value(bo.getCpf()))
+                .andExpect(jsonPath("$.document").value(bo.getDocument()))
                 .andExpect(jsonPath("$.name").value(bo.getName()))
                 .andExpect(jsonPath("$.socialName").value(bo.getSocialName()))
                 .andExpect(jsonPath("$.birthDate").value(bo.getBirthDate().toString()))

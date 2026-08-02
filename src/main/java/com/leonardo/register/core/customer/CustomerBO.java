@@ -1,4 +1,4 @@
-package com.leonardo.register.core;
+package com.leonardo.register.core.customer;
 
 import lombok.Builder;
 import lombok.Value;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class CustomerBO {
 
     Long id;
-    String cpf;
+    String document;
     String name;
     String socialName;
     LocalDate birthDate;

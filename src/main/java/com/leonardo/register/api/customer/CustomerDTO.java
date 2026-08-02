@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public record CustomerDTO(
 
         Long id,
-        @NotBlank(message = "CPF is required")
-        String cpf,
+        @NotBlank(message = "Document is required")
+        String document,
         @NotBlank(message = "Name is required")
         String name,
         String socialName,
