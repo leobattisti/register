@@ -16,6 +16,13 @@ public class CustomerController {
     private final CustomerApiConverter converter;
     private final CustomerService service;
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find customer by id")
+    public CustomerDTO findById(@PathVariable String id) {
+        return converter.toResponse(service.findById(id));
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create valid customer")

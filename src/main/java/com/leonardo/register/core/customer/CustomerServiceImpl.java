@@ -23,6 +23,11 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository repository;
 
     @Override
+    public CustomerBO findById(String id) {
+        return repository.findById(id);
+    }
+
+    @Override
     public CustomerBO create(CustomerBO bo) {
         documentValidator(bo.getDocument());
         birthDateValidator(bo);
