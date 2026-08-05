@@ -1,5 +1,8 @@
 package com.leonardo.register.api.customer;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.With;
 
@@ -10,24 +13,36 @@ import java.time.LocalDate;
 public record CustomerDTO(
 
         Long id,
-        String cpf,
+        @NotBlank(message = "Document is required")
+        String document,
+        @NotBlank(message = "Name is required")
         String name,
         String socialName,
+        @NotNull(message = "Birth date is required")
         LocalDate birthDate,
+        @Valid
+        @NotNull(message = "Address is required")
         Address address
 
 ) {
 
-    public record Address (
+    @With
+    @Builder(toBuilder = true)
+    public record Address(
 
+            @NotBlank(message = "Street is required")
             String street,
             String number,
             String complement,
+            @NotBlank(message = "Neighborhood is required")
             String neighborhood,
+            @NotBlank(message = "City is required")
             String city,
+            @NotBlank(message = "Postal code is required")
             String postalCode
 
     ) {
 
     }
+
 }

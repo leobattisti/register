@@ -1,6 +1,6 @@
 package com.leonardo.register.api.customer;
 
-import com.leonardo.register.core.CustomerBO;
+import com.leonardo.register.core.customer.CustomerBO;
 import org.mapstruct.Mapper;
 
 @Mapper
@@ -8,6 +8,6 @@ public interface CustomerApiConverter {
 
     CustomerBO toBusiness(CustomerDTO dto);
 
-    CustomerDTO toDto(CustomerBO bo);
+    CustomerDTO toResponse(CustomerBO bo);
 
 }
