@@ -16,6 +16,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,8 +35,12 @@ class CustomerControllerTest {
 
     private static final String[] ERROR_MESSAGES_CUSTOMER = {"Document is required",
             "Name is required",
+            "Phone is required",
             "Birth date is required",
             "Address is required"};
+    private static final String[] ERROR_MESSAGES_PHONE = {"Phone DDD is required",
+            "Phone number is required",
+            "Phone type is required"};
     private static final String[] ERROR_MESSAGES_ADDRESS = {"Street is required",
             "Neighborhood is required",
             "City is required",
@@ -66,6 +72,9 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.document").value(bo.getDocument()))
                 .andExpect(jsonPath("$.name").value(bo.getName()))
                 .andExpect(jsonPath("$.socialName").value(bo.getSocialName()))
+                .andExpect(jsonPath("$.phones[0].ddd").value(bo.getPhones().getFirst().getDdd()))
+                .andExpect(jsonPath("$.phones[0].number").value(bo.getPhones().getFirst().getNumber()))
+                .andExpect(jsonPath("$.phones[0].type").value(bo.getPhones().getFirst().getType().toString()))
                 .andExpect(jsonPath("$.birthDate").value(bo.getBirthDate().toString()))
                 .andExpect(jsonPath("$.address.street").value(bo.getAddress().getStreet()))
                 .andExpect(jsonPath("$.address.number").value(bo.getAddress().getNumber()))
@@ -117,4 +126,24 @@ class CustomerControllerTest {
         verifyNoInteractions(service);
     }
 
+    @Test
+    @SneakyThrows
+    void shouldNotCreateCustomerWhenPhoneCustomerDtoIsEmpty() {
+        var request = Instancio.create(CustomerDTO.class);
+        var phone = CustomerDTO.Phone.builder().build();
+
+        var content = OBJECT_MAPPER.writeValueAsString(request.withPhones(List.of(phone)));
+
+        var response = mockMvc.perform(post(URL).content(content)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        var errorResponse = OBJECT_MAPPER.readValue(response.getResponse().getContentAsString(), GlobalExceptionHandler.ErrorResponse.class);
+
+        assertThat(errorResponse.code()).isEqualTo(BAD_REQUEST_CODE);
+        assertThat(errorResponse.messages()).containsExactlyInAnyOrder(ERROR_MESSAGES_PHONE);
+
+        verifyNoInteractions(service);
+    }
 }

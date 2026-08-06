@@ -10,6 +10,7 @@ public enum Errors {
 
     CUSTOMER_INVALID_DOCUMENT(1, UnprocessableContent.class, "The document <%s> is neither a CPF nor a CNPJ"),
     CUSTOMER_INVALID_BIRTH_DATE(2, UnprocessableContent.class, "Birth date <%s> is after the current date"),
+    CUSTOMER_INVALID_PHONE_LENGTH(3, UnprocessableContent.class, "Phone number <%s> is invalid for type <%s>"),
     ;
 
     private final int errorCode;

@@ -6,6 +6,7 @@ import lombok.With;
 import lombok.experimental.FieldNameConstants;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @With
 @Value
@@ -17,8 +18,21 @@ public class CustomerBO {
     String document;
     String name;
     String socialName;
+    List<Phone> phones;
     LocalDate birthDate;
     Address address;
+
+    @With
+    @Value
+    @FieldNameConstants
+    @Builder(toBuilder = true)
+    public static class Phone {
+
+        String ddd;
+        String number;
+        PhoneType type;
+
+    }
 
     @With
     @Value

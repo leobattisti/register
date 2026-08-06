@@ -26,6 +26,9 @@ public class CustomerApiConverterTest {
         assertThat(bo.getDocument()).isEqualTo(dto.document());
         assertThat(bo.getName()).isEqualTo(dto.name());
         assertThat(bo.getSocialName()).isEqualTo(dto.socialName());
+        assertThat(bo.getPhones().getFirst().getDdd()).isEqualTo(dto.phones().getFirst().ddd());
+        assertThat(bo.getPhones().getFirst().getNumber()).isEqualTo(dto.phones().getFirst().number());
+        assertThat(bo.getPhones().getFirst().getType()).isEqualTo(dto.phones().getFirst().type());
         assertThat(bo.getBirthDate()).isEqualTo(dto.birthDate());
         assertThat(bo.getAddress().getStreet()).isEqualTo(dto.address().street());
         assertThat(bo.getAddress().getNumber()).isEqualTo(dto.address().number());
@@ -46,6 +49,9 @@ public class CustomerApiConverterTest {
         assertThat(dto.name()).isEqualTo(bo.getName());
         assertThat(dto.socialName()).isEqualTo(bo.getSocialName());
         assertThat(dto.birthDate()).isEqualTo(bo.getBirthDate());
+        assertThat(dto.phones().getFirst().ddd()).isEqualTo(bo.getPhones().getFirst().getDdd());
+        assertThat(dto.phones().getFirst().number()).isEqualTo(bo.getPhones().getFirst().getNumber());
+        assertThat(dto.phones().getFirst().type()).isEqualTo(bo.getPhones().getFirst().getType());
         assertThat(dto.address().street()).isEqualTo(bo.getAddress().getStreet());
         assertThat(dto.address().number()).isEqualTo(bo.getAddress().getNumber());
         assertThat(dto.address().complement()).isEqualTo(bo.getAddress().getComplement());
