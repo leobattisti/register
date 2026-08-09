@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -39,6 +41,32 @@ class CustomerServiceImplTest {
 
     @Mock
     private CustomerRepository repository;
+
+    @Test
+    void shouldFindById() {
+        var id = Instancio.create(String.class);
+        var customer = Instancio.create(CustomerBO.class);
+
+        when(repository.findById(id)).thenReturn(customer);
+
+        var result = service.findById(id);
+
+        assertThat(result).isEqualTo(customer);
+    }
+
+    @Test
+    void shouldFindByFilter() {
+        var filter = Instancio.create(CustomerBO.Filter.class);
+        var pageable = Pageable.ofSize(1);
+        var customer = Instancio.create(CustomerBO.class);
+        var customerPage = new PageImpl<>(List.of(customer));
+
+        when(repository.findByFilter(filter, pageable)).thenReturn(customerPage);
+
+        var result = service.findByFilter(filter, pageable);
+
+        assertThat(result).isEqualTo(customerPage);
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {"12345678912", "12345678912345"})

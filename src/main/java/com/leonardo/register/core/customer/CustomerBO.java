@@ -1,6 +1,7 @@
 package com.leonardo.register.core.customer;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Value;
 import lombok.With;
 import lombok.experimental.FieldNameConstants;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class CustomerBO {
 
-    Long id;
+    String id;
     String document;
     String name;
     String socialName;
@@ -47,6 +48,17 @@ public class CustomerBO {
         String city;
         String postalCode;
 
+    }
+
+    @Data
+    @FieldNameConstants
+    @Builder(toBuilder = true)
+    public static class Filter {
+
+        private String document;
+        private String nameOrSocialName;
+        private String phoneNumber;
+        private String address;
     }
 
 }

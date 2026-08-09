@@ -15,7 +15,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 public record CustomerDTO(
 
-        Long id,
+        String id,
         @NotBlank(message = "Document is required")
         String document,
         @NotBlank(message = "Name is required")

@@ -4,6 +4,8 @@ import com.leonardo.register.core.exception.Errors;
 import com.leonardo.register.data.customer.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
@@ -30,6 +32,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerBO findById(String id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Page<CustomerBO> findByFilter(CustomerBO.Filter filter, Pageable pageable) {
+        return repository.findByFilter(filter, pageable);
     }
 
     @Override

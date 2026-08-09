@@ -4,11 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import java.time.Clock;
 import java.time.ZoneId;
 
 @SpringBootApplication
+@EnableSpringDataWebSupport
 public class RegisterApplication {
 
     private static final ZoneId AMERICAS_SAO_PAULO_ZONE = ZoneId.of("America/Sao_Paulo");
